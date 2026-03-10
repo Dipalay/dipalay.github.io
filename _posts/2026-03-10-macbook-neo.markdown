@@ -3,7 +3,7 @@ layout: post
 title: Macbook Neo could be better, but it's okay
 date: 2026-03-10 00:45:00 +0300
 description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
-img: macbook-neo.jpg # Add image post (optional)
+img: image.png # Add image post (optional)
 fig-caption: # Add figcaption (optional)
 tags: [Apple, Macbook]
 ---
