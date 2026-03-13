@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Is planning making our life better?
-date: 2026-03-14 10:00:00 +0300
+date: 2026-03-14 00:00:00 +0300
 description: You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. # Add post description (optional)
 img: planning-projet.png # Add image post (optional)
 tags: [Programming, Learn] # add tag
