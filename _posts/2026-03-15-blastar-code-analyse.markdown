@@ -18,7 +18,7 @@ enum S is creating state machines for changing state of game
 @export var bullet_scene: PackedScene
 @export var freighter_scene: PackedScene
 @export var status_beam_scene: PackedScene
-{% endhighlight 
+{% endhighlight %}
 @export means that we will need to assign these variables in Godot inspector
 PackedScene means that variable is Scene and we can't assign anythin other
 
@@ -81,7 +81,7 @@ func clean_bullets():
 	for c in get_children():
 		if c.is_in_group("bullets"):
 			c.queue_free()
-{% endhighliht %}
+{% endhighlight %}
 Function clean_bullets() is iterating through children of scene and removing every object which is in "bullets" group.
 
 {% highlight python %}
