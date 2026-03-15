@@ -175,14 +175,14 @@ It's making score, ships and status beam text invisible and ct, st visible.
 State of game is set to TITLE and score is 0 and ships are 5.
 Also there are initated functions as cleanup, set_player and hud.
 
-{% higlight python %}
+{% highlight python %}
 func show_instructions():
 	state = S.INSTRUCTIONS
 
 	ct.text = "MISSION"
 
 	st.text = "USE ARROW KEYS FOR CONTROL\nAND SPACE BAR TO SHOOT\n\nDESTROY ALIEN FREIGHTER\nCARRYING DEADLY HYDROGEN BOMBS\nAND STATUS BEAM MACHINES\n\nPRESS SPACE TO BEGIN"
-{% endhiglight %}
+{% endhighlight %}
 show_instructions() is setting state to instructions and center text and subtext.
 
 {% highlight python %}
