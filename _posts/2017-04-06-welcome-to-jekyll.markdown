@@ -12,18 +12,17 @@ To add new posts, simply add a file in the `_posts` directory that follows the c
 Jekyll also offers powerful support for code snippets:
 
 {% highlight python %}
-	some shit:
 
 	func _on_kill():
-	score += 80
-	_hud()
-	_end_beam()
-	freighter = null
+		score += 80
+		_hud()
+		_end_beam()
+		freighter = null
 
-	await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(0.5).timeout
 
-	if state == S.PLAYING:
-		_spawn()
+		if state == S.PLAYING:
+			_spawn()
 
 	
 {% endhighlight %}
