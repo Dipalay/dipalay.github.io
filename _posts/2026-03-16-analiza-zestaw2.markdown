@@ -110,7 +110,7 @@ $$
 
 ## Warunek istnienia pierwiastka
 
-Pierwiastek czwartego stopnia istnieje tylko wtedy, gdy wyrażenie pod nim jest $\ge 0$.
+Pierwiastek czwartego stopnia istnieje tylko wtedy, gdy wyrażenie pod nim jest \(\ge 0\).
 
 <div markdown="0">
 $$
@@ -146,15 +146,15 @@ x^2 + y^2 = 1
 $$
 </div>
 
-to okrąg o promieniu $1$ i środku w $(0,0)$.
+to okrąg o promieniu \(1\) i środku w \((0,0)\).
 
-Ponieważ mamy $\le$, dziedzina to całe koło jednostkowe razem z brzegiem.
+Ponieważ mamy \(\le\), dziedzina to całe koło jednostkowe razem z brzegiem.
 
 ## Graficznie
 
 Dziedzina to:
-- środek w $(0,0)$
-- promień $1$
+- środek w \((0,0)\)
+- promień \(1\)
 - wypełnione koło
 
 czyli wszystkie punkty wewnątrz okręgu i na nim.
