@@ -84,6 +84,8 @@ $$
 
 Graficznie tworzy to dwa symetryczne obszary otwierające się w lewo i w prawo względem osi \(x\).
 
+![Wykres dziedziny](/assets/img/dziedzina_wykres.png)
+
 ## Podsumowanie
 
 Dziedziną funkcji są wszystkie punkty płaszczyzny spełniające warunek:
