@@ -1,11 +1,10 @@
 ---
-
 layout: post
 title: "Blastar Clone – Architecture and Gameplay Analysis"
 date: 2026-03-14 00:32:20 +0300
 description: Technical breakdown of the gameplay architecture used in my Blastar clone made in Godot.
 img: blastar.png
-----------------
+---
 
 # Blastar Clone – Architecture and Gameplay Analysis
 
