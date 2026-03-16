@@ -3,7 +3,7 @@ layout: post
 title: "Dziedziny, pochodne i macierze"
 date: 2026-03-16 13:40:00 +0100
 description: 
-img: analiza.png
+img: zestaw2.png
 ---
 # Zadanie 1 -- Dziedzina funkcji (podpunkt i)
 
