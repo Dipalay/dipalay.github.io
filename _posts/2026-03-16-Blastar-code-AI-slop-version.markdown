@@ -4,7 +4,7 @@ title: "Blastar clone – code analysis of my game"
 date: 2026-03-14 00:32:20 +0300
 description: Analysis of the main mechanics implemented in my Blastar clone written in Godot.
 img: blastar.png
-----------------
+---
 
 # game.gd – main mechanics
 
