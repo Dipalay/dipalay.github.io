@@ -160,3 +160,104 @@ Dziedzina to:
 czyli wszystkie punkty wewnątrz okręgu i na nim.
 
 ![Wykres dziedziny 2](/assets/img/dziedzina_wykres2.png)
+
+# Zadanie 6 — Dziedzina funkcji
+
+Dana funkcja:
+
+<div markdown="0">
+$$
+f(x,y) = \sqrt{\sin(x^2 + y^2)}
+$$
+</div>
+
+## Warunek dziedziny
+
+Pierwiastek istnieje tylko gdy:
+
+<div markdown="0">
+$$
+\sin(x^2 + y^2) \ge 0
+$$
+</div>
+
+Oznaczmy:
+
+<div markdown="0">
+$$
+t = x^2 + y^2
+$$
+</div>
+
+czyli <span markdown="0">\(t \ge 0\)</span>.
+
+Wiemy, że:
+
+<div markdown="0">
+$$
+\sin t \ge 0 \quad \text{dla} \quad t \in [2k\pi, (2k+1)\pi], \quad k=0, 1, 2, ...
+$$
+</div>
+
+## Podstawiamy z powrotem
+
+<div markdown="0">
+$$
+x^2 + y^2 \in [2k\pi, (2k+1)\pi]
+$$
+</div>
+
+## Dziedzina
+
+<div markdown="0">
+$$
+D = \bigcup_{k=0}^{\infty} \{(x,y): 2k\pi \le x^2 + y^2 \le (2k+1)\pi\}
+$$
+</div>
+
+## Interpretacja geometryczna
+
+To są pierścienie na płaszczyźnie:
+
+pierwszy:
+
+<div markdown="0">
+$$
+0 \le x^2 + y^2 \le \pi
+$$
+</div>
+
+czyli koło o promieniu <span markdown="0">\(r = \sqrt{\pi}\)</span>
+
+drugi:
+
+<div markdown="0">
+$$
+2\pi \le x^2 + y^2 \le 3\pi
+$$
+</div>
+
+czyli pierścień między <span markdown="0">\(r = \sqrt{2\pi}\)</span> i <span markdown="0">\(r = \sqrt{3\pi}\)</span>
+
+trzeci:
+
+<div markdown="0">
+$$
+4\pi \le x^2 + y^2 \le 5\pi
+$$
+</div>
+
+itd.
+
+## Jak to narysować
+
+Rysujesz współrzędne i zaznaczasz:
+- pełne koło <span markdown="0">\(r = \sqrt{\pi}\)</span>
+- potem pusty obszar
+- potem pierścień między <span markdown="0">\(\sqrt{2\pi}\)</span> i <span markdown="0">\(\sqrt{3\pi}\)</span>
+- potem znowu przerwa
+- itd.
+
+Czyli wygląda jak tarcza strzelnicza z przerwami 🎯
+
+![Wykres dziedziny Zadanie 6](/assets/img/dziedzina_wykres3.png)
