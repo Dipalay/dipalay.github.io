@@ -1,14 +1,12 @@
 ---
 layout: post
-title: "Blastar clone – code analysis by AI Slop"
+title: "Blastar clone - code analysis (improved by AI)"
 date: 2026-03-14 00:32:20 +0300
-description: Analysis of the main mechanics implemented in my Blastar clone written in Godot.
+description: Code analysis of the main mechanics implemented in my Blastar clone written in Godot.
 img: blastar.png
 ---
 
-# game.gd – main mechanics
-
-## Script base and game states
+# game.gd - main mechanics
 
 ```python
 extends Node2D
@@ -16,22 +14,11 @@ extends Node2D
 enum S { TITLE, INSTRUCTIONS, PLAYING, GAME_OVER }
 ```
 
-`extends Node2D` means that this script is attached to a **Node2D object in the Godot scene**.
+`extends Node2D` means that this script is assigned to a **Node2D object in the Godot scene**.
 
-`enum S` defines a **state machine** used to control the game flow.
-
-The game can be in four states:
-
-| State | Description |
-|------|------|
-| TITLE | Title screen |
-| INSTRUCTIONS | Mission instructions |
-| PLAYING | Main gameplay |
-| GAME_OVER | End screen |
+`enum S` creates a **state machine** used for changing the state of the game.
 
 ---
-
-# Scene references
 
 ```python
 @export var bullet_scene: PackedScene
@@ -39,19 +26,11 @@ The game can be in four states:
 @export var status_beam_scene: PackedScene
 ```
 
-`@export` makes variables visible in the **Godot Inspector**, so scenes can be assigned in the editor.
+`@export` means that these variables will need to be assigned in the **Godot Inspector**.
 
-`PackedScene` means the variable stores a **scene resource**, which can later be instantiated during gameplay.
-
-These scenes represent:
-
-- `bullet_scene` – player's rocket
-- `freighter_scene` – enemy ship
-- `status_beam_scene` – enemy beam attack
+`PackedScene` means that the variable stores a **scene resource**, so we cannot assign anything other than a scene.
 
 ---
-
-# Core game variables
 
 ```python
 var state = S.TITLE
@@ -63,21 +42,16 @@ var p: CharacterBody2D
 var fspd = 180.0
 ```
 
-These variables store the main game data.
+Here we create the basic variables such as the current state, score, and ships (lives).
 
-| Variable | Description |
-|--------|--------|
-| `state` | current game state |
-| `score` | player score |
-| `ships` | number of remaining lives |
-| `freighter` | reference to the enemy ship |
-| `beam` | reference to the active status beam |
-| `p` | reference to the player |
-| `fspd` | freighter movement speed |
+We also initialize references for:
+
+- `beam`
+- `freighter`
+- `p` (player)
+- `fspd` (freighter speed)
 
 ---
-
-# UI references
 
 ```python
 @onready var sl: Label = $UI/ScoreLabel
@@ -87,19 +61,17 @@ These variables store the main game data.
 @onready var bt: Label = $UI/StatusBeamText
 ```
 
-`@onready` means the variables are assigned **after the scene is loaded**.
+`@onready` means that these variables will be assigned **when the scene is loaded**.
 
-These variables reference UI elements used to display:
+Here we assign UI text objects used for displaying:
 
-- player score
-- remaining ships
-- center screen text
-- instruction text
-- status beam warning
+- score
+- ships
+- status beam text
+- center text
+- subtext
 
 ---
-
-# Player activation
 
 ```python
 func _set_player(on: bool, pos := Vector2.ZERO):
@@ -112,20 +84,20 @@ func _set_player(on: bool, pos := Vector2.ZERO):
 		p.in_status_beam = false
 ```
 
-This function enables or disables the player.
+Here we create the `_set_player` function, which takes two arguments:
 
-If `on` is `true`:
+- `on` – a boolean value
+- `pos` – a `Vector2` position
 
-- the player becomes visible
-- process and physics updates are enabled
-- the player is moved to the given position
-- the `in_status_beam` flag is reset
+`p.visible = on` means that the player's visibility will match the value of `on`.
 
-If `on` is `false`, the player becomes inactive.
+`p.set_process(on)` enables or disables the `_process` logic of the player.
+
+`p.set_physics_process(on)` enables or disables the physics logic of the player.
+
+If `on` is `true`, the player's position is set to `pos`, and the `in_status_beam` flag is reset.
 
 ---
-
-# HUD update
 
 ```python
 func _hud():
@@ -133,11 +105,9 @@ func _hud():
 	hl.text = "SHIPS " + str(ships)
 ```
 
-The `_hud()` function updates the **HUD labels** with the current score and number of ships.
+The `_hud()` function updates the score and ships values in the UI.
 
 ---
-
-# Removing the beam
 
 ```python
 func _clear_beam():
@@ -146,11 +116,9 @@ func _clear_beam():
 		beam = null
 ```
 
-This function safely removes the **status beam** from the scene and clears its reference.
+The `_clear_beam()` function removes the beam from the scene using `beam.queue_free()` and sets the `beam` variable to `null` if the beam exists and is valid.
 
 ---
-
-# Cleaning bullets
 
 ```python
 func clean_bullets():
@@ -159,11 +127,9 @@ func clean_bullets():
 			c.queue_free()
 ```
 
-`clean_bullets()` iterates through the children of the scene and removes all nodes belonging to the `"bullets"` group.
+The `clean_bullets()` function iterates through all children of the scene and removes every object that belongs to the `"bullets"` group.
 
 ---
-
-# Cleaning gameplay objects
 
 ```python
 func _cleanup():
@@ -172,20 +138,15 @@ func _cleanup():
 		freighter = null
 
 	_clear_beam()
+
 	clean_bullets()
 ```
 
-This function removes active gameplay objects:
+`_cleanup()` removes the freighter and clears its reference if it exists.
 
-- the enemy freighter
-- the status beam
-- any remaining bullets
-
-It is typically used when switching game states.
+It also calls `_clear_beam()` and `clean_bullets()` to remove the beam and all bullets.
 
 ---
-
-# Ending the beam
 
 ```python
 func _end_beam():
@@ -194,22 +155,18 @@ func _end_beam():
 	_clear_beam()
 ```
 
-This function ends the **status beam event**.
-
-It hides the warning text, resets the player beam state, and removes the beam.
+`_end_beam()` hides the Status Beam text, disables the status beam state for the player, and clears the beam object.
 
 ---
-
-# Beam result events
 
 ```python
 func _on_miss():
 	_end_beam()
 ```
 
-This function is called when the beam **misses the player**.
+This function may seem unnecessary, but it makes the code cleaner and easier to read.
 
-Its main purpose is to keep the code organized and readable.
+---
 
 ```python
 func _on_hit():
@@ -217,13 +174,10 @@ func _on_hit():
 	_lose()
 ```
 
-This function is called when the beam **hits the player**.
-
-The beam ends and the player loses a ship.
+This function has a similar role as the previous one.  
+It improves readability and separates logic for different events.
 
 ---
-
-# Destroying the freighter
 
 ```python
 func _on_kill():
@@ -238,19 +192,13 @@ func _on_kill():
 		_spawn()
 ```
 
-This function runs when the enemy freighter is destroyed.
+`_on_kill()` is called when the enemy is destroyed.
 
-Steps performed:
+It increases the score by 80, updates the HUD, and ensures that the status beam is disabled.
 
-1. Increase score by 80  
-2. Update the HUD  
-3. End any active beam  
-4. Clear the freighter reference  
-5. After a short delay, spawn a new enemy if the game is still running  
+Then it clears the enemy reference and waits 0.5 seconds before spawning a new enemy if the game state is still `PLAYING`.
 
 ---
-
-# Spawning the enemy
 
 ```python
 func _spawn():
@@ -264,19 +212,20 @@ func _spawn():
 	add_child(freighter)
 ```
 
-This function creates a new enemy freighter.
+If a freighter already exists in the scene, it is removed.
 
-Steps:
+Then a new freighter scene is instantiated.
 
-1. Remove any existing freighter  
-2. Instantiate a new freighter scene  
-3. Set its position to `x = 50` and a random `y` coordinate  
-4. Connect the destruction signal  
-5. Add the enemy to the scene  
+Its position is set to:
+
+- `x = 50`
+- `y = 40 + random value between 0 and 180`
+
+The `freighter_destroyed` signal is connected to `_on_kill`.
+
+Finally, the enemy is spawned by adding it to the scene.
 
 ---
-
-# Title screen
 
 ```python
 func show_title():
@@ -299,11 +248,13 @@ func show_title():
 	st.visible = true
 ```
 
-This function shows the **title screen** and resets the game.
+`show_title()` sets the game state to `TITLE` and resets the score and ships.
+
+It also runs `_cleanup()`, disables the player, and updates the HUD.
+
+Score, ships, and status beam texts are hidden, while the title and subtitle are displayed.
 
 ---
-
-# Instructions screen
 
 ```python
 func show_instructions():
@@ -314,11 +265,9 @@ func show_instructions():
 	st.text = "USE ARROW KEYS FOR CONTROL\nAND SPACE BAR TO SHOOT\n\nDESTROY ALIEN FREIGHTER\nCARRYING DEADLY HYDROGEN BOMBS\nAND STATUS BEAM MACHINES\n\nPRESS SPACE TO BEGIN"
 ```
 
-This screen explains the controls and the objective of the game.
+`show_instructions()` changes the state to `INSTRUCTIONS` and displays the mission text.
 
 ---
-
-# Starting the game
 
 ```python
 func start_game():
@@ -339,13 +288,13 @@ func start_game():
 	_spawn()
 ```
 
-This function starts a new game.
+`start_game()` changes the state to `PLAYING` and resets score and ships.
 
-It resets the score and ships, enables the player, and spawns the first enemy.
+Center text, subtext, and status beam text are hidden, while score and ships labels are visible.
+
+The HUD is updated, the player is placed at position `(576, 500)`, and the first enemy is spawned.
 
 ---
-
-# Game over screen
 
 ```python
 func show_game_over():
@@ -361,11 +310,11 @@ func show_game_over():
 	ct.visible = true
 ```
 
-This function displays the **game over screen** and shows the final score.
+`show_game_over()` sets the state to `GAME_OVER`, cleans up the scene, and disables the player.
+
+It hides the subtext and status beam text, then displays the final score.
 
 ---
-
-# Status beam attack
 
 ```python
 func _fire_beam():
@@ -388,19 +337,17 @@ func _fire_beam():
 	add_child(beam)
 ```
 
-This function activates the **status beam attack**.
+`_fire_beam()` activates the status beam attack.
 
-Actions performed:
+It shows the status beam text, removes player bullets, and aligns the player with the enemy's X position.
 
-- show beam warning text  
-- remove player bullets  
-- align the player with the beam  
-- spawn the beam object  
-- connect hit and miss signals  
+Then the status beam scene is instantiated and positioned below the enemy.
+
+Signals are connected for beam hit and beam miss events.
+
+If a beam already exists, nothing happens.
 
 ---
-
-# Shooting rockets
 
 ```python
 func shoot_rocket():
@@ -415,13 +362,11 @@ func shoot_rocket():
 	add_child(r)
 ```
 
-This function spawns a rocket projectile slightly above the player.
+`shoot_rocket()` removes existing bullets and spawns a new rocket.
 
-Only one rocket exists at a time because previous bullets are removed before spawning a new one.
+The rocket appears slightly above the player (`y - 25`) and is then added to the scene.
 
 ---
-
-# Losing a ship
 
 ```python
 func _lose():
@@ -445,15 +390,13 @@ func _lose():
 		_spawn()
 ```
 
-This function handles player death.
+`_lose()` decreases the number of ships and updates the HUD.
 
-If ships remain, the player respawns after 1 second and a new enemy is spawned.
+If there are no ships left, the game switches to the game over screen.
 
-If no ships remain, the game ends.
+Otherwise the enemy and player are removed, and after one second the player respawns and a new enemy appears.
 
 ---
-
-# Scene initialization
 
 ```python
 func _ready():
@@ -464,11 +407,9 @@ func _ready():
 
 `_ready()` runs once after the scene loads.
 
-It retrieves the player node and shows the title screen.
+Here we assign the Player node to the variable `p`, disable the player, and show the title screen.
 
 ---
-
-# Main update loop
 
 ```python
 func _process(d):
@@ -491,11 +432,20 @@ func _process(d):
 				show_title()
 ```
 
-`_process()` runs every frame and controls **state transitions** based on player input.
+`_process()` runs every frame.
+
+The variable `d` (delta) helps keep movement consistent regardless of frame rate.
+
+The variable `space` becomes true if the player presses the space key.
+
+The state machine controls transitions between:
+
+- title
+- instructions
+- gameplay
+- game over
 
 ---
-
-# Enemy movement and beam trigger
 
 ```python
 func _update(d):
@@ -515,8 +465,10 @@ func _update(d):
 		freighter.position.x = 50
 ```
 
-This function updates the enemy behavior.
+This function updates the enemy behaviour.
 
-If the freighter aligns with the player horizontally, the **status beam attack** is triggered.
+If the horizontal distance between the player and the enemy is less than 5 pixels, the status beam attack starts.
 
-Otherwise the enemy moves across the screen and reappears on the left side when reaching the right edge.
+Otherwise the enemy moves across the screen.
+
+When the enemy reaches `x = 1100`, it returns to `x = 50` and repeats the movement.
