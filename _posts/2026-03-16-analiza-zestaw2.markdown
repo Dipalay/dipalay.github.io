@@ -82,7 +82,7 @@ $$
 $$
 </div>
 
-Graficznie tworzy to dwa symetryczne obszary otwierające się w lewo i w prawo względem osi \(x\).
+Graficznie tworzy to dwa symetryczne obszary otwierające się w lewo i w prawo względem osi <span markdown="0">\(x\)</span>.
 
 ![Wykres dziedziny](/assets/img/dziedzina_wykres.png)
 
@@ -96,7 +96,7 @@ x^2 - y^2 \ge 0
 $$
 </div>
 
-czyli punkty leżące pomiędzy prostymi \(y=x\) oraz \(y=-x\) (łącznie z tymi prostymi).
+czyli punkty leżące pomiędzy prostymi <span markdown="0">\(y=x\)</span> oraz <span markdown="0">\(y=-x\)</span> (łącznie z tymi prostymi).
 
 # Zadanie 1 — Dziedzina funkcji (podpunkt ii)
 
@@ -110,7 +110,7 @@ $$
 
 ## Warunek istnienia pierwiastka
 
-Pierwiastek czwartego stopnia istnieje tylko wtedy, gdy wyrażenie pod nim jest \(\ge 0\).
+Pierwiastek czwartego stopnia istnieje tylko wtedy, gdy wyrażenie pod nim jest <span markdown="0">\(\ge 0\)</span>.
 
 <div markdown="0">
 $$
@@ -146,15 +146,15 @@ x^2 + y^2 = 1
 $$
 </div>
 
-to okrąg o promieniu \(1\) i środku w \((0,0)\).
+to okrąg o promieniu <span markdown="0">\(1\)</span> i środku w <span markdown="0">\((0,0)\)</span>.
 
-Ponieważ mamy \(\le\), dziedzina to całe koło jednostkowe razem z brzegiem.
+Ponieważ mamy <span markdown="0">\(\le\)</span>, dziedzina to całe koło jednostkowe razem z brzegiem.
 
 ## Graficznie
 
 Dziedzina to:
-- środek w \((0,0)\)
-- promień \(1\)
+- środek w <span markdown="0">\((0,0)\)</span>
+- promień <span markdown="0">\(1\)</span>
 - wypełnione koło
 
 czyli wszystkie punkty wewnątrz okręgu i na nim.
