@@ -97,3 +97,66 @@ $$
 </div>
 
 czyli punkty leżące pomiędzy prostymi \(y=x\) oraz \(y=-x\) (łącznie z tymi prostymi).
+
+# Zadanie 1 — Dziedzina funkcji (podpunkt ii)
+
+Rozważamy funkcję:
+
+<div markdown="0">
+$$
+f(x,y) = \sqrt[4]{1 - x^2 - y^2}
+$$
+</div>
+
+## Warunek istnienia pierwiastka
+
+Pierwiastek czwartego stopnia istnieje tylko wtedy, gdy wyrażenie pod nim jest $\ge 0$.
+
+<div markdown="0">
+$$
+1 - x^2 - y^2 \ge 0
+$$
+</div>
+
+Przekształcamy:
+
+<div markdown="0">
+$$
+x^2 + y^2 \le 1
+$$
+</div>
+
+## Dziedzina
+
+Dziedziną jest zbiór punktów spełniających powyższą nierówność:
+
+<div markdown="0">
+$$
+D = \{(x,y) \in \mathbb{R}^2 : x^2 + y^2 \le 1 \}
+$$
+</div>
+
+## Interpretacja geometryczna
+
+Równanie
+
+<div markdown="0">
+$$
+x^2 + y^2 = 1
+$$
+</div>
+
+to okrąg o promieniu $1$ i środku w $(0,0)$.
+
+Ponieważ mamy $\le$, dziedzina to całe koło jednostkowe razem z brzegiem.
+
+## Graficznie
+
+Dziedzina to:
+- środek w $(0,0)$
+- promień $1$
+- wypełnione koło
+
+czyli wszystkie punkty wewnątrz okręgu i na nim.
+
+![Wykres dziedziny 2](/assets/img/dziedzina_wykres2.png)
